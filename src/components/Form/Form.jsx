@@ -46,7 +46,7 @@ const Form = ({ airports, handleRoute, setSelectedAirports }) => {
       );
   
       handleRoute(
-        result.map((airportId) => ({ id: airportId, name: airports[airportId].name })),
+        result?.map((airportId) => ({ id: airportId, name: airports[airportId].name })),
         airports[endSelect].distanceFromStarter,
       );
     });
