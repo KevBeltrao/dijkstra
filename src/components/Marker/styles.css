@@ -1,0 +1,18 @@
+.marker {
+  background-color: red;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+
+  display: grid;
+  place-items: center;
+}
+
+.marked {
+  transition: background 0.5s;
+  background-color: green;
+  color: #fff;
+  font-weight: bold;
+  width: 20px;
+  height: 20px;
+}

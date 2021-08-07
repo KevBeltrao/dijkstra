@@ -1,0 +1,28 @@
+.form {
+  position: absolute;
+  z-index: 99;
+  
+  margin: 30px auto;
+  padding: 10px 20px;
+  
+  background-color: #ffffffee;
+  border-radius: 5px;
+
+  width: fit-content;
+  display: flex;
+  flex-wrap: wrap;
+  align-self: flex-start;
+}
+
+.form > * {
+  margin: 10px 10px;
+  border-radius: 5px;
+  font-size: 1rem;
+  padding: 5px;
+}
+
+.form > button {
+  border: 1px solid #000;
+  background: #fff;
+  cursor: pointer;
+}

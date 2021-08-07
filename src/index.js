@@ -3,10 +3,13 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import ProgressComponent from './globalStorage/Progress';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <ProgressComponent>
+      <App />
+    </ProgressComponent>
   </React.StrictMode>,
   document.getElementById('root')
 );
