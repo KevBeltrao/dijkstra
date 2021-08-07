@@ -1,22 +1,33 @@
-import { useRef, useContext } from 'react';
+import { useState, useContext } from 'react';
+import { Select as SelectAntd, Button } from 'antd';
+
 import  { ProgressContext } from '../../globalStorage/Progress';
 
 import './styles.css';
 import dijkstra from '../../utils/dijkstra';
 
-const Select = ({ list, reference }) => {
+const Select = ({ list, value, setValue }) => {
   return (
-    <select ref={reference}>
+    <SelectAntd
+      value={value}
+      onChange={setValue}
+      showSearch
+      filterOption={(input, option) =>
+        option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+      }
+    >
       {list.map(([id, { name }]) => (
-        <option key={id} value={id}>{name}</option>
+        <SelectAntd.Option key={id} value={id}>{name}</SelectAntd.Option>
       ))}
-    </select>
+    </SelectAntd>
   );
 };
 
+
+
 const Form = ({ airports, handleRoute, setSelectedAirports }) => {
-  const selectStartRef = useRef();
-  const selectEndRef = useRef();
+  const [starterSelect, setStarterSelect] = useState(null);
+  const [endSelect, setEndSelect] = useState(null);
 
   const { progressDispatch } = useContext(ProgressContext);
 
@@ -27,25 +38,39 @@ const Form = ({ airports, handleRoute, setSelectedAirports }) => {
 
     progressDispatch({ type: 'START' });
 
-    const result = dijkstra(
-      airports,
-      selectStartRef.current.value,
-      selectEndRef.current.value,
-      (newValue) => progressDispatch({ type: 'UPDATE', value: newValue }),
-    );
-
-    handleRoute(
-      result.map((airportId) => ({ id: airportId, name: airports[airportId].name })),
-      airports[selectEndRef.current.value].distanceFromStarter,
-    );
+    setTimeout(() => {
+      const result = dijkstra(
+        airports,
+        starterSelect,
+        endSelect,
+      );
+  
+      handleRoute(
+        result.map((airportId) => ({ id: airportId, name: airports[airportId].name })),
+        airports[endSelect].distanceFromStarter,
+      );
+    });
   };
 
   return (
     <form onSubmit={handleSubmit} className="form">
-      <Select reference={selectStartRef} list={Object.entries(airports)} />
-      <Select reference={selectEndRef} list={Object.entries(airports)} />
+      <Select
+        value={starterSelect}
+        setValue={setStarterSelect}
+        list={Object.entries(airports)}
+      />
 
-      <button type="submit">Encontrar rota</button>
+     <Select
+      value={endSelect}
+      setValue={setEndSelect}
+      list={Object.entries(airports)}
+      />
+
+      <Button
+        htmlType="submit"
+        type="primary"
+        disabled={!starterSelect || !endSelect}
+      >Encontrar rota</Button>
     </form>
   );
 }

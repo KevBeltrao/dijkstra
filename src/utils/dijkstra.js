@@ -1,4 +1,4 @@
-const dijkstra = (base, startId, endId, showProgress) => {
+const dijkstra = (base, startId, endId) => {
   if (startId === endId) {
     base[startId].distanceFromStarter = 0;
     return [startId];
@@ -25,7 +25,7 @@ const dijkstra = (base, startId, endId, showProgress) => {
 
       if (porcent !== newPorcent) {
         porcent = newPorcent;
-        showProgress(porcent);
+        console.log(porcent);
       }
 
       currentAirport.destinations.forEach((destinationId) => {

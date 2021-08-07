@@ -12,6 +12,7 @@
   display: flex;
   flex-wrap: wrap;
   align-self: flex-start;
+  align-items: center;
 }
 
 .form > * {
@@ -21,8 +22,12 @@
   padding: 5px;
 }
 
+.form > .ant-select {
+  width: 300px;
+  text-align: left;
+}
+
 .form > button {
-  border: 1px solid #000;
-  background: #fff;
-  cursor: pointer;
+  display: flex;
+  align-items: center;
 }

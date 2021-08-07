@@ -87,7 +87,6 @@ export default function App() {
       {progressValue.shouldShow && (
         <Spin
           className="progress"
-          // type="circle"
           size="large"
           percent={progressValue.value}
         />
